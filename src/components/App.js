@@ -7,6 +7,11 @@ export class App extends HTMLElement {
     super(parentNode, "main", "main");
 
     const output = new Output(this.node);
-    new Keyboard(this.node, keys);
+    new Keyboard(this.node, keys, output.update.bind(output));
+    window.addEventListener("keydown", (e) => {
+      if (document.activeElement.tagName === "TEXTAREA") {
+        output.history.push(e.key);
+      }
+    });
   }
 }
