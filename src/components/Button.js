@@ -9,9 +9,6 @@ export class Button extends HTMLElement {
     this.state.onUpdate.subscribe(keyboardUpdate);
 
     this.node.onclick = () => {
-      if (this.key.sign === "Caps Lock") {
-        this.node.classList.toggle("capslock-active");
-      }
       this.state.setData(this.key);
     };
   }
