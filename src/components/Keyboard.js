@@ -29,7 +29,7 @@ export class Keyboard extends HTMLElement {
           (btn) => btn.key.position && e.code === btn.key.position
         );
       } else {
-        pressedKey = this.buttons.find((btn) => btn.key.code === e.keyCode);
+        pressedKey = this.buttons.find((btn) => btn.key.code === e.code);
       }
 
       if (pressedKey) {
@@ -38,16 +38,27 @@ export class Keyboard extends HTMLElement {
           pressedKey.node.classList.remove("animated");
         }, 300);
       }
-      if (e.key === "CapsLock") {
+      if (pressedKey && e.key === "CapsLock") {
         this.toggleCase();
         pressedKey.node.classList.toggle("capslock-active");
       }
     });
 
-    window.addEventListener("click", (e) => {
-      if (e.target.textContent === "Caps Lock") {
+    window.addEventListener("mousedown", (e) => {
+      if (e.target.textContent === "Shift") {
         this.toggleCase();
-        e.target.classList.toggle("capslock-active");
+      }
+    });
+    window.addEventListener("mouseup", (e) => {
+      if (e.target.textContent === "Shift") {
+        this.toggleCase();
+      }
+    });
+
+    this.node.addEventListener("click", (e) => {
+      if (e.target.parentNode.textContent === "Caps Lock") {
+        this.toggleCase();
+        e.target.parentElement.classList.toggle("capslock-active");
       }
     });
 
@@ -124,24 +135,8 @@ export class Keyboard extends HTMLElement {
   }
 
   toggleCase() {
-    const buttons = [
-      ...this.signTopRow.node.children,
-      ...this.signMidRow.node.children,
-      ...this.signBotRow.node.children,
-    ];
-
-    buttons.forEach((button) => {
-      if (
-        button.textContent.length === 1 &&
-        button.textContent.search(/[a-z]/) !== -1
-      ) {
-        button.textContent = button.textContent.toUpperCase();
-      } else if (
-        button.textContent.length === 1 &&
-        button.textContent.search(/[A-Z]/) !== -1
-      ) {
-        button.textContent = button.textContent.toLowerCase();
-      }
+    this.buttons.forEach((button) => {
+      button.switchCase();
     });
   }
 }
