@@ -1,9 +1,8 @@
 import { hasCapsLock } from "./KeyCapsLock";
 
 export class Key {
-  constructor(data, dataKeys, cases, cursorPlace) {
+  constructor(data, dataKeys, cursorPlace) {
     this.data = data;
-    this.cases = cases;
     this.dataKeys = dataKeys;
     this.cursorPlace = cursorPlace;
   }
