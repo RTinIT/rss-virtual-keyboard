@@ -56,17 +56,11 @@ export class Keyboard extends HTMLElement {
   }
 
   takePressedKey(e) {
-    if (
-      e &&
-      (e.key.includes("Shift") ||
-        e.key.includes("Alt") ||
-        e.key.includes("Control"))
-    ) {
-      return this.buttons.find(
-        (btn) => btn.key.position && e.code === btn.key.position
-      );
-    }
-    return this.buttons.find((btn) => btn.key.code === e.code);
+    return ["Shift", "Alt", "Control"].includes(e.key)
+      ? this.buttons.find(
+          (btn) => btn.key.position && e.code === btn.key.position
+        )
+      : this.buttons.find((btn) => btn.key.code === e.code);
   }
 
   shiftAction(e) {
