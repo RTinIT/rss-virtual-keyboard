@@ -5,13 +5,18 @@
 }
 
 .main {
-  width: min(70vw, 700px);
+  width: min(80vw, 760px);
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   gap: 2em;
   margin: 0 auto;
+  font-family: sans-serif;
+}
+
+.main__title {
+  text-transform: lowercase;
 }
 
 .output {
@@ -21,74 +26,96 @@
 
 .keyboard {
   width: 100%;
-  min-width: 626px;
+  min-width: 760px;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: .2em;
   border: 1px solid #202020;
   border-radius: 4px;
-  padding: .2em;
+  padding: .4em;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: animate-bg 15s ease infinite;
 }
 
-.row {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: .2em;
-
+@keyframes animate-bg {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
-.button {
-  padding: .4em .6em;
-  transition: .3s;
-  flex: 1;
+button {
+  padding: 0.2em 0.2em;
+  transition: .2s;
   appearance: none;
-  border: 1px solid #848484;
-  border-radius: 2px;
+  width: 45px;
+  height: 40px;
+  border-radius: 4px;
+  border: none;
+  background: #32323254;
+  box-shadow: 2px 2px 3px #252525;
+  cursor: pointer;
 }
 
-.row:nth-child(2) .button:nth-child(1) {
-  flex: 3;
+button.backspace,
+button.controlleft,
+button.shiftleft,
+button.shiftright
+{
+  width: 80px;
 }
-.row:nth-child(3) .button:nth-child(1) {
-  flex: 5;
+
+button.tab,
+button.capslock,
+button.enter,
+button.delete
+{
+  width: 60px;
 }
-.row:nth-child(4) .button:nth-child(1) {
-  flex: 4;
-}
-.row:nth-child(4) .button:nth-child(13) {
-  flex: 2;
-}
-.row:nth-child(5) .button:nth-child(3) {
-  flex: 10;
-  height: 2em;
-}
-.row:nth-child(5) .button:nth-child(1) {
-  flex: 2;
-}
-.row:nth-child(5) .button:nth-child(2) {
-  flex: 2;
+
+button.space {
+  width: 250px;
 }
 
 .button:hover {
-  background-color: rgba(21, 21, 21, 0.214);
+
 }
-.button:active {
-  color: white;
-  background-color: #202020;
-  border-radius: 50%;
+
+button:active {
+  box-shadow: none;
+  transform: translate(0px, 3px);
+}
+
+.button__shift-key {
+  display: block;
+  font-size: 12px;
+  font-weight: 300;
+  text-align: start;
+  color: #eeeeee;
+}
+
+.button__main-key {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  color: #eeeeee;
 }
 
 .capslock-active {
-  background: rgb(155, 12, 12);
+  background: #e73c7e;
   color: white;
 }
 
 .animated {
-  color: white;
-  background-color: #202020;
-  border-radius: 50%;
+  box-shadow: none;
+  transform: translate(0px, 3px);
 }
